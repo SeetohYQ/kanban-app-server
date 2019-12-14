@@ -134,6 +134,8 @@ const authenticateUser = (param) => {
 	)
 };
 
+app.use(cors());
+
 // Load passport and LocalStrategy
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
