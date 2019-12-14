@@ -36,8 +36,8 @@ if (fs.existsSync(__dirname + '/config.js')) {
 		}
 	};
 	configs.s3 = {
-		accessKey: process.env.ACCESS_KEY,
-		secretKey: process.env.SECRET_ACCESS_KEY
+		accessKey: process.env.AWS_ACCESS_KEY_ID,
+		secretKey: process.env.AWS_SECRET_ACCESS_KEY
 	}
 	configs.mongodb = {
 		url: process.env.MONGO_CONN_STRING
