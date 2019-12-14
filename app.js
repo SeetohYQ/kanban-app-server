@@ -214,10 +214,10 @@ io.on('connection', socket => {
 		const username = usernameAndTeamId.username;
 		const teamId = usernameAndTeamId.teamId;
 
-		console.info('Room details before join', io.sockets.adapter.rooms[teamId]);
+		//console.info('Room details before join', io.sockets.adapter.rooms[teamId]);
 		socket.join(teamId, (err) => {
-			console.log(`${username} joined room ${teamId}`);
-			console.info('Room details after join', io.sockets.adapter.rooms[teamId]);
+			//console.log(`${username} joined room ${teamId}`);
+			//console.info('Room details after join', io.sockets.adapter.rooms[teamId]);
 			socket.to(teamId).emit('joinRoom', `${username} joined room ${teamId}`);
 		});
 	});
@@ -321,7 +321,7 @@ io.on('connection', socket => {
 		const board_name = boardIdAndNameAndUser.board_name;
 		const board_id = boardIdAndNameAndUser.board_id;
 
-		console.info('Updating task board name by', username);
+		//console.info('Updating task board name by', username);
 		updateTaskboardName([board_name, board_id])
 			.then(result => {
 				socket.emit('newBoardName', { board_name, board_id });
@@ -335,7 +335,7 @@ io.on('connection', socket => {
 	socket.on('createTaskBoard', (usernameAndTeamId) => {
 		const username = usernameAndTeamId.username;
 		const teamId = usernameAndTeamId.teamId;
-		console.info('Creating new task board by', username);
+		//console.info('Creating new task board by', username);
 
 		pool.getConnection((err, conn) => {
 			if (err) {
@@ -636,7 +636,7 @@ app.get('/api/users/:id',
 	(req, res, next) => {
 		const authorization = req.get('Authorization');
 
-		console.info('authorization', authorization);
+		//console.info('authorization', authorization);
 		if (!(authorization && authorization.startsWith('Bearer ')))
 			return res.status(403).json({ message: 'not authorized' });
 
@@ -646,14 +646,14 @@ app.get('/api/users/:id',
 			.toArray()
 			.then(result => {
 				if (result.length > 0) {
-					console.info('found token');
+					//console.info('found token');
 					//req.jwt = result[0].token;
 					//check if token is still valid i.e. expired or not
 					//token undefined if expired
 					req.jwt = jwt.verify(tokenStr, 'SECRET');
 				}
 				else {
-					console.info('token not found');
+					//console.info('token not found');
 					req.jwt = jwt.verify(tokenStr, 'SECRET');
 
 					client.db('projectmanagement').collection('jwt_tokens').insertOne({
@@ -686,7 +686,7 @@ app.put('/api/users/:id', multipart.single('profilePic'),
 	(req, res, next) => {
 		const authorization = req.get('Authorization');
 
-		console.info('authorization', authorization);
+		//console.info('authorization', authorization);
 		if (!(authorization && authorization.startsWith('Bearer ')))
 			return res.status(403).json({ message: 'not authorized' });
 
@@ -696,12 +696,12 @@ app.put('/api/users/:id', multipart.single('profilePic'),
 			.toArray()
 			.then(result => {
 				if (result.length > 0) {
-					console.info('found token');
+					//console.info('found token');
 					req.jwt = result[0].token;
 					return next();
 				}
 				else {
-					console.info('token not found');
+					//console.info('token not found');
 					req.jwt = jwt.verify(tokenStr, 'SECRET');
 
 					client.db('projectmanagement').collection('jwt_tokens').insertOne({
@@ -782,7 +782,7 @@ app.get('/api/users/team/:id',
 	(req, res, next) => {
 		const authorization = req.get('Authorization');
 
-		console.info('authorization', authorization);
+		//console.info('authorization', authorization);
 		if (!(authorization && authorization.startsWith('Bearer ')))
 			return res.status(403).json({ message: 'not authorized' });
 
@@ -792,12 +792,12 @@ app.get('/api/users/team/:id',
 			.toArray()
 			.then(result => {
 				if (result.length > 0) {
-					console.info('found token');
+					//console.info('found token');
 					req.jwt = result[0].token;
 					return next();
 				}
 				else {
-					console.info('token not found');
+					//console.info('token not found');
 					req.jwt = jwt.verify(tokenStr, 'SECRET');
 
 					client.db('projectmanagement').collection('jwt_tokens').insertOne({
