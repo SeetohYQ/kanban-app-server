@@ -15,7 +15,7 @@ const jwt = require('jsonwebtoken');
 const PORT = parseInt(process.argv[2] || process.env.APP_PORT) || 3000;
 
 //Set up configs for MySQL, Mongo and AWS S3
-let configs;
+let configs = {};
 
 if (fs.existsSync(__dirname + '/config.js')) {
 	configs = require('./config');
