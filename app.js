@@ -159,7 +159,6 @@ const multipart = multer({ dest: path.join(__dirname, '/tmp') });
 app.use(morgan('tiny'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 app.use(express.static(__dirname + '/public'));
 app.use(passport.initialize())
 
